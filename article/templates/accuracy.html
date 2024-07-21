@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style type="text/css">
+    #box {
+        height: 500px;
+        overflow-y: scroll;
+        background: white;
+        width: 80%;
+        margin: auto;
+        color: black;
+        font-family: "Noto Sans Mono", monospace;
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;
+        font-variation-settings: "wdth" 100;
+    }
+
+    .highlight {
+        background-color: lightgray;
+    }
+
+    .heading {
+        font-family: "Noto Sans", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 500;
+        font-style: normal;
+        font-variation-settings: "wdth" 100;
+    }
+
+</style>
+
+<main class="px-3">
+    <h1 class="heading" style="padding-bottom: 50px">Accuracy</h1>
+
+{% if score %}
+
+<div>
+    <h1 class="heading">ROUGE Score: {{ score }}</h1>
+    <h2 class="heading">Genrated Summary</h2>
+    <h5 class="heading" style="padding-bottom: 15px;">Word Count: {{ count2 }},       Word Reduction {{ percent }}%</h5>
+    <p class="lead" id="box">
+        <span class="highlight"> {{ ext_summary }} </span>
+    </p>
+    <br>
+    <br>
+    <h2 class="heading">Reference Summary</h2>
+    <h5 class="heading" style="padding-bottom: 15px">Word Count: {{ count3 }}</h5>
+    <p class="lead" id="box">
+        <span class="highlight"> {{ ref_summ }} </span>
+    </p>
+    <br>
+    <br>
+    <h2 class="heading">Original Document</h2>
+    <h5 class="heading" style="padding-bottom: 15px">Word Count: {{ count1 }}</h5>
+    <p class="lead" id="box">
+        <span class="highlight"> {{ text }} </span>
+    </p>
+    <br>
+</div>
+
+{% endif %}
+
+</main>
+
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    #box {
+        height: 500px;
+        overflow-y: scroll;
+        background: white;
+        color: black;
+        font-family: "Noto Sans Mono", monospace;
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;
+        font-variation-settings: "wdth" 100;
+
+    }
+
+    .highlight {
+        background-color: lightgray;
+    }
+
+    .headings {
+        font-family: "Noto Sans", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 500;
+        font-style: normal;
+        font-variation-settings: "wdth" 100;
+    }
+
+</style>
+
+<main class="px-3">
+    <h1 class="headings" style="padding-bottom: 50px">Article Summarization</h1>
+
+<div class="form">
+    <form action="/articledownload/" method="POST" type="text" accept-charset="utf-8">{% csrf_token %}
+    <div class="pb-5 ">
+    <input class="form-control form-control-sm w-50 m-auto mb-3" name="getarticle" type="text" placeholder="Enter Article URL" />
+    <input class="form-control form-control-sm w-25 m-auto mb-3"  name="ratio" type="number" step="any" value="0.2"/>
+    <input class="btn btn-sm btn-secondary fw-bold border-white bg-white" type="submit" value="Submit">
+    </div>
+    </form>
+    </div>
+
+<!-- 
+article title -->
+
+<h1 class="headings"> {{ title }} </h1>
+
+<br>
+
+<!-- 
+article text -->
+
+{% if title %}
+
+<div class="container-fluid">
+    <div class="row ">
+        <div class="col-md-6 d-md-block d-none ">
+            <h2 class="headings">Original Text</h2>
+            <h5 class="headings" style="padding-bottom: 15px">Word Count: {{ wordcount1 }}</h5>
+            <p class="lead" id="box"> 
+                <span class="highlight"> {{ text }} </span>
+            </p>
+        </div>
+
+        <div class="col-md-6 d-inline">
+            <h2 class="headings">Generated Summary</h2>
+            <h5 class="headings" style="padding-bottom: 15px;">Word Count: {{ wordcount2 }},       Word Reduction {{ percent }}%</h5>
+            <p class="lead" id="box">
+                <span class="highlight"> {{ summary }} </span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<h2 class="headings" style="text-align: center;">Accuarcy</h2>
+
+<div>
+    <h5 class="headings">Keyword retention percentage: {{ percent2 }}%.</h5>
+</div>
+
+{% endif %}
+
+</main>
+
+
+
+{% endblock %}

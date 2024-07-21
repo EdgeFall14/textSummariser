@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<main class="px-3">
+    <h1 class="heading" style="padding-bottom: 50px">Contact Us</h1>
+
+<div class="form" style="padding-bottom: 50px">
+    <form action="/thankyou/" method="POST" type="text" accept-charset="utf-8">{% csrf_token %}
+    <div class="pb-5">
+    <input class="form-control form-control-sm w-50 m-auto mb-3" name="getname" type="text" placeholder="Name" />
+    <input class="form-control form-control-sm w-50 m-auto mb-3" name="getemail" type="text" placeholder="E-mail Address" />
+    <input class="form-control form-control-sm w-50 m-auto mb-3" name="getmessage" type="text" placeholder="Message(optional)" />
+    <input class="btn btn-sm btn-secondary fw-bold border-white bg-white" type="submit" value="Submit">
+    </div>
+    </form>
+</div>
+
+
+</main>
+
+{% endblock %}

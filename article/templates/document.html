@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style type="text/css">
+    #box {
+        height: 500px;
+        overflow-y: scroll;
+        background: white;
+        width: 80%;
+        margin: auto;
+        color: black;
+        font-family: "Noto Sans Mono", monospace;
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;
+        font-variation-settings: "wdth" 100;
+    }
+
+    .highlight {
+        background-color: lightgray;
+    }
+
+    .heading {
+        font-family: "Noto Sans", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 500;
+        font-style: normal;
+        font-variation-settings: "wdth" 100;
+    }
+
+</style>
+
+<main class="px-3">
+    <h1 class="heading" style="padding-bottom: 50px">Document</h1>
+
+<div class="form" style="padding-bottom: 50px">
+    <form action="/documentdownload/" method="POST" enctype="multipart/form-data" accept-charset="utf-8">{% csrf_token %}
+    <div class="pb-5">
+    <input class="form-control form-control-sm w-50 m-auto mb-3" name="getpdf" type="file" accept=".pdf" placeholder="Document file(.pdf)" />
+    <select class="form-control form-control-sm w-50 m-auto mb-3" name="summtype" type="text" placeholder="Select type">
+        <option value="abstractive">Abstractive Summarization</option>
+        <option value="extractive">Extractive Summarization</option>   
+    </select>
+    <input class="btn btn-sm btn-secondary fw-bold border-white bg-white" type="submit" name="submit" value="Upload">
+    </div>
+    </form>
+</div>
+
+{% if wordcount1 %}
+
+<div>
+    <h2 class="heading">Genrated Summary</h2>
+    <h5 class="heading" style="padding-bottom: 15px;">Word Count: {{ wordcount2 }},       Word Reduction {{ percent }}%</h5>
+    <p class="lead" id="box">
+        <span class="highlight"> {{ summary }} </span>
+    </p>
+    <br>
+    <br>
+    <h2 class="heading">Original Document</h2>
+    <h5 class="heading" style="padding-bottom: 15px">Word Count: {{ wordcount1 }}</h5>
+    <p class="lead" id="box">
+        <span class="highlight"> {{ text }} </span>
+    </p>
+    <br>
+    <br>
+    <br>
+</div>
+
+{% endif %}
+
+</main>
+
+{% endblock %}
